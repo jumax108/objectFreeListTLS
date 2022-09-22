@@ -257,7 +257,7 @@ void CObjectFreeListTLS<T>::_freeObject(T* object, const wchar_t* fileName,int l
 
 	///////////////////////////////////////////////////////////////////////
 	// ÇÒ´çÇß´ø ³ëµå È¹µæ
-	stAllocTlsNode<T>* allocatedNode = (stAllocTlsNode<T>*)((unsigned __int64)object + objectFreeListTLS::DATA_TO_NODE_PTR);
+	stAllocTlsNode<T>* allocatedNode = (stAllocTlsNode<T>*)((unsigned __int64)object + nsObjectFreeListTLS::DATA_TO_NODE_PTR);
 	///////////////////////////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////////////////////////
@@ -380,7 +380,7 @@ public:
 	stAllocTlsNode<T>* _allocNode;
 	int _leftFreeCnt;
 
-	alignas(64) stAllocTlsNode<T> _nodes[objectFreeListTLS::CHUNK_SIZE];
+	alignas(64) stAllocTlsNode<T> _nodes[nsObjectFreeListTLS::CHUNK_SIZE];
 	stAllocTlsNode<T>* _nodeEnd;
 	int _nodeNum;
 
@@ -391,7 +391,7 @@ public:
 template<typename T>
 stAllocChunk<T>::stAllocChunk() {
 
-	_nodeNum = objectFreeListTLS::CHUNK_SIZE;
+	_nodeNum = nsObjectFreeListTLS::CHUNK_SIZE;
 	_nodeEnd = _nodes + _nodeNum - 1;
 
 	for (int nodeCnt = 0; nodeCnt < _nodeNum; ++nodeCnt) {
